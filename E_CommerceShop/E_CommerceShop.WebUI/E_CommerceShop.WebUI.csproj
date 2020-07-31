@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -267,6 +268,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\ProductManager\Index.cshtml" />
+    <Content Include="Views\ProductManager\Create.cshtml" />
+    <Content Include="Views\ProductManager\Edit.cshtml" />
+    <Content Include="Views\ProductManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -278,6 +283,24 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\E_CommerceShop.Core\E_CommerceShop.Core.csproj">
+      <Project>{51f75342-5e88-4e06-80d5-033de324bf20}</Project>
+      <Name>E_CommerceShop.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\E_CommerceShop.DataAccess.InMemory\E_CommerceShop.DataAccess.InMemory.csproj">
+      <Project>{dc743804-c71d-47eb-a44d-41a56d3ee444}</Project>
+      <Name>E_CommerceShop.DataAccess.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\E_CommerceShop.DataAccess.SQL\E_CommerceShop.DataAccess.SQL.csproj">
+      <Project>{0e1cf557-ff75-4ae9-b102-7d1eb002c798}</Project>
+      <Name>E_CommerceShop.DataAccess.SQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\E_CommerceShop.Services\E_CommerceShop.Services.csproj">
+      <Project>{f975ac91-1767-49b7-b035-a8d54a5eb81f}</Project>
+      <Name>E_CommerceShop.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
