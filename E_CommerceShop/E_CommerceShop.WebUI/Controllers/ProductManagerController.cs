@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,7 +39,7 @@ namespace E_CommerceShop.WebUI.Controllers
                 
         }
         [HttpPost]
-        public ActionResult Create(Products product)
+        public ActionResult Create(Products product,HttpPostedFileBase file)
         {
             if(!ModelState.IsValid)
             {
@@ -46,6 +47,12 @@ namespace E_CommerceShop.WebUI.Controllers
             }
             else
             {
+                if(file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
+                }
+
                 context.Insert(product);
                 context.Commit();
                 return RedirectToAction("Index");
@@ -54,6 +61,7 @@ namespace E_CommerceShop.WebUI.Controllers
 
         public ActionResult Edit(string Id)
         {
+
             Products product = context.Find(Id);
             if(product==null)
             {
@@ -71,7 +79,7 @@ namespace E_CommerceShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Products product, string Id)
+        public ActionResult Edit(Products product, string Id, HttpPostedFileBase file)
         {
             Products productToEdit = context.Find(Id);
 
@@ -85,17 +93,21 @@ namespace E_CommerceShop.WebUI.Controllers
                 {
                     return View(product);
                 }
-                else
+               
+                if(file!=null)
                 {
+                    productToEdit.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
+                }
                     productToEdit.Category = product.Category;
                     productToEdit.Descripition = product.Descripition;
                     productToEdit.Name = product.Name;
                     productToEdit.Price = product.Price;
-                    productToEdit.Image = product.Image;
+                  
 
                     context.Commit();
                     return RedirectToAction("Index");
-                }
+               
             }
         }
 
