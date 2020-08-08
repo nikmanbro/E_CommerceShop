@@ -1,5 +1,6 @@
 ﻿using E_CommerceShop.Core.Contracts;
 using E_CommerceShop.Core.Models;
+using E_CommerceShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,23 @@ namespace E_CommerceShop.WebUI.Controllers
             context = productContext;
             productCategories = productCategoryContext;
         }
-        public ActionResult Index()
+        public ActionResult Index(string Category=null)
         {
-            List<Products> products = context.Collection().ToList();
-            return View(products);
+            List<Products> products;
+            List<ProductCategory> categories=productCategories.Collection().ToList();
+            if(Category==null)
+            {
+               products= context.Collection().ToList();
+            }
+            else
+            {
+                products = context.Collection().Where(p => p.Category == Category).ToList(); 
+            }
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.ProductCategories =categories;
+
+            return View(model);
         }
 
         public ActionResult Details( string Id)
