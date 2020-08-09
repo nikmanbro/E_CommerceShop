@@ -2,6 +2,7 @@ using E_CommerceShop.Core.Contracts;
 using E_CommerceShop.Core.Models;
 using E_CommerceShop.DataAccess.InMemory;
 using E_CommerceShop.DataAccess.SQL;
+using E_CommerceShop.Services;
 using System;
 
 using Unity;
@@ -48,6 +49,9 @@ namespace E_CommerceShop.WebUI
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Products>,SQLRepository<Products>>();
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
+            container.RegisterType<IRepository<Basket>, SQLRepository<Basket>>();
+            container.RegisterType<IRepository<BasketItem>, SQLRepository<BasketItem>>();
+            container.RegisterType<IBasketService,BasketService>();
         }
     }
 }
